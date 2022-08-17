@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/poly/c_code",
-      "program": "/home/poly/c_code/build/Release/outRelease",
+      "cwd": "/home/poly/c_code/cry数字",
+      "program": "/home/poly/c_code/cry数字/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
