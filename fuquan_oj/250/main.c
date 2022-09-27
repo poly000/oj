@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-static int nums[100000];
+static int nums[11451419];
 
 int read_num(int *);
-bool contains(int n, int key, int nums[static n]);
+int binary_search(int left_bound, int right_bound, int x, int arr[static right_bound+1]);
 
 int main(void) {
     int n;
@@ -14,11 +14,9 @@ int main(void) {
         scanf("%d", &nums[i]);
     }
 
-    scanf("%*d");
-
     int num;
     while (read_num(&num) == 1) {
-        printf("%s\n", contains(n, num, nums) ? "YES" : "NO");
+        printf("%s\n", binary_search(0, n-1, num, nums) >= 0 ? "YES" : "NO");
     }
 
 }
@@ -27,14 +25,26 @@ int read_num(int * num) {
     return scanf("%d", num);
 }
 
+int three_way(int a, int b) {
+    if (a<b) return -1;
+    if (a==b) return 0;
+    return 1;
+}
 
-bool contains(int n, int key, int nums[static n]) {
-    if (n == 0) return false;
+int binary_search(int left_bound, int right_bound, int x, int arr[static right_bound+1]) {
+    if (left_bound > right_bound) return -1;
 
-    if (n%2 == 0) {
-        return contains(n/2, key, nums) || contains(n/2, key, &nums[n/2]);
+    int mid = (left_bound+right_bound) / 2;
+
+    switch (three_way(arr[mid], x)) {
+
+    case 1:
+        return binary_search(left_bound, mid-1, x, arr);
+    case -1:
+        return binary_search(mid+1, right_bound, x, arr);
+    default:
+        return mid;
     }
 
-    if (nums[n/2] == key) return true;
-    else return contains(n/2, key, nums)||contains(n/2, key, &nums[n/2+1]);
+    return -1;
 }
